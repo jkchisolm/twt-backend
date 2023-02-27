@@ -36,6 +36,8 @@ jobs:
             captain-definition
             Dockerfile
             docker.env
+            package.json
+            package-lock.json
           outPath: deploy.tar
 
       - name: Deploy App to CapRover
