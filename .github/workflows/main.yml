@@ -2,10 +2,10 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build-and-deploy:
@@ -14,33 +14,33 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-    
+
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: 'npm'
       - run: npm ci
       - run: npm run build --if-present
       - run: npm run test --if-present
-      
+
       - uses: a7ul/tar-action@v1.1.0
         with:
           command: c
-          cwd: "./"
+          cwd: './'
           files: |
             src/
             dist/
             captain-definition
+            Dockerfile
+            docker.env
           outPath: deploy.tar
-      
+
       - name: Deploy App to CapRover
         uses: caprover/deploy-from-github@v1.0.1
         with:
           server: '${{ secrets.CAPROVER_URL }}'
           app: '${{ secrets.APP_NAME }}'
           token: '${{ secrets.NEST_CAPROVER_APP_TOKEN }}'
-          
-        
