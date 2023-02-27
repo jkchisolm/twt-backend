@@ -1,22 +1,42 @@
 name: CI/CD Deploy
 on: 
   push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 jobs:
   deploy:
+    name: Deploy to Caprover
     runs-on: ubuntu-latest
     
+    env:
+      CAPROVER_URL: ${{ secrets.CAPROVER_URL }}
+      NEST_CAPROVER_APP_TOKEN: ${{ secrets.NEST_CAPROVER_APP_TOKEN }}
+      CAPROVER_PASSWORD: ${{ secrets.CAPROVER_PASSWORD }}
+    
     steps:
-      - name: CapRover Deploy
-        # You may pin to the exact commit or the version.
-        # uses: AlexxNB/caprover-action@45fdf55f3213582285394908e8a3a0d2df41e21d
-        uses: AlexxNB/caprover-action@v1
-        with:
-          # CapRover admin panel URL. Ex. https://captain.root.domain.com
-          server: https://captain.server.joshuachisolmserver.com
-          # CapRover admin password. Use $\{{ secrets.CAPROVER_PASSWORD }} for better security.
-          password: $\{{ secrets.CAPROVER_PASSWORD }}
-          # Application name on the CapRover server. Must exists.
-          appname: twt-api
-          # Branch which will be deployed
-          branch: main
+      - name: 'Install CapRover CLI'
+        run: npm install -g caprover
+      
+      - name: 'Deploy to CapRover'
+        env:
+          APP_NAME: ${{ secrets.APP_NAME }}
+          APP_URL: ${{ env.CAPROVER_URL }}
+          CAPROVER_APP_TOKEN: ${{ env.NEST_CAPROVER_APP_TOKEN }}
+          CAPROVER_PASSWORD: ${{ env.CAPROVER_PASSWORD }}
+        run: 'caprover deploy -h $APP_URL -p $CAPROVER_PASSWORD -b main -a $APP_NAME'
+#     steps:
+#       - name: CapRover Deploy
+#         # You may pin to the exact commit or the version.
+#         # uses: AlexxNB/caprover-action@45fdf55f3213582285394908e8a3a0d2df41e21d
+#         uses: AlexxNB/caprover-action@v1
+#         with:
+#           # CapRover admin panel URL. Ex. https://captain.root.domain.com
+#           server: https://captain.server.joshuachisolmserver.com
+#           # CapRover admin password. Use $\{{ secrets.CAPROVER_PASSWORD }} for better security.
+#           password: $\{{ secrets.CAPROVER_PASSWORD }}
+#           # Application name on the CapRover server. Must exists.
+#           appname: twt-api
+#           # Branch which will be deployed
+#           branch: main
