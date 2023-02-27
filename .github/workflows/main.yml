@@ -1,0 +1,22 @@
+name: CI/CD Deploy
+on: 
+  push:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: CapRover Deploy
+        # You may pin to the exact commit or the version.
+        # uses: AlexxNB/caprover-action@45fdf55f3213582285394908e8a3a0d2df41e21d
+        uses: AlexxNB/caprover-action@v1
+        with:
+          # CapRover admin panel URL. Ex. https://captain.root.domain.com
+          server: https://captain.server.joshuachisolmserver.com
+          # CapRover admin password. Use $\{{ secrets.CAPROVER_PASSWORD }} for better security.
+          password: $\{{ secrets.CAPROVER_PASSWORD }}
+          # Application name on the CapRover server. Must exists.
+          appname: twt-api
+          # Branch which will be deployed
+          branch: main
