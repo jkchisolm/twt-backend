@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres
+    networks:
+      - postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - docker.env
+
+  pgadmin:
+    image: dpage/pgadmin4
+    networks:
+      - postgres
+    ports:
+      - '8080:80'
+    env_file:
+      - docker.env
+
+  twitter-api:
+    build:
+      context: .
+      target: dev
+    command: npm run start:dev
+    volumes:
+      - ./src:/usr/src/app/src
+    depends_on:
+      - postgres
+    networks:
+      - postgres
+    ports:
+      - '3000:3000'
+    env_file:
+      - docker.env
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
