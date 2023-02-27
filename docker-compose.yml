@@ -7,7 +7,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     env_file:
-      - docker.env
+      - .env
 
   pgadmin:
     image: dpage/pgadmin4
@@ -16,7 +16,7 @@ services:
     ports:
       - '8080:80'
     env_file:
-      - docker.env
+      - .env
 
   twitter-api:
     build:
@@ -27,12 +27,20 @@ services:
       - ./src:/usr/src/app/src
     depends_on:
       - postgres
+    environment:
+      # PORT: 4000
+      PROD: ${PROD}
+      SERVER_PORT: ${SERVER_PORT}
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
     networks:
       - postgres
     ports:
       - '3000:3000'
     env_file:
-      - docker.env
+      - .env
 
 networks:
   postgres:
