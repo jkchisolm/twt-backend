@@ -19,8 +19,13 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: number): Promise<User> {
+    const user = this.usersRepository.findOne({ where: { id } });
+    if (user) {
+      return user;
+    } else {
+      return undefined;
+    }
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
