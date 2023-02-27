@@ -38,6 +38,9 @@ jobs:
             docker.env
             package.json
             package-lock.json
+            tsconfig.json
+            tsconfig.build.json
+            nest-cli.json
           outPath: deploy.tar
 
       - name: Deploy App to CapRover
