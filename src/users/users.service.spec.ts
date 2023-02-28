@@ -105,6 +105,12 @@ describe('UsersService', () => {
         });
       });
     });
+    describe('given the user already exists', () => {
+      it('should return undefined', async () => {
+        repositoryMock.findOne.mockReturnValue(user);
+        await expect(service.create(createUserDto)).toEqual(undefined);
+      });
+    });
   });
 
   describe('findAll()', () => {

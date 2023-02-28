@@ -13,6 +13,12 @@ export class UsersService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
+    // Check if user already exists in database
+    const userExists = this.usersRepository.findOne({
+      where: { email: createUserDto.email },
+    });
+    if (userExists) return undefined;
+
     // Hash password
     const password = createUserDto.password;
     const hashedPassword = bcrypt.hashSync(password, 10);
