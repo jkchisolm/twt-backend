@@ -35,7 +35,6 @@ jobs:
             dist/
             captain-definition
             Dockerfile
-            docker.env
             package.json
             package-lock.json
             tsconfig.json
