@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { PostsModule } from './posts/posts.module';
+import { TweetsModule } from './tweets/tweets.module';
 import { User } from './users/entities/user.entity';
-import { Post } from './posts/entities/post.entity';
+import { Tweet } from './tweets/entities/tweet.entity';
 
 @Module({
   imports: [
@@ -18,10 +18,10 @@ import { Post } from './posts/entities/post.entity';
       database: process.env.DB_NAME,
       synchronize: true,
       logging: true,
-      entities: [User, Post],
+      entities: [User, Tweet],
     }),
     UsersModule,
-    PostsModule,
+    TweetsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

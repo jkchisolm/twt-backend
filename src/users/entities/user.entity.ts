@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Post } from '../../posts/entities/post.entity';
+import { Tweet } from '../../tweets/entities/tweet.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -42,6 +42,6 @@ export class User {
   @CreateDateColumn()
   created_at: Date;
 
-  @OneToMany(() => Post, (post) => post.author)
-  posts: Post[];
+  @OneToMany(() => Tweet, (post) => post.author)
+  posts: Tweet[];
 }

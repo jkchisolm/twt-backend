@@ -6,9 +6,14 @@ import {
   CreateDateColumn,
   ManyToOne,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
-export class Post {
+export class Tweet {
+  @ApiProperty({
+    example: 1,
+    description: "The tweet's automatically generated id.",
+  })
   @PrimaryGeneratedColumn()
   id: number;
 

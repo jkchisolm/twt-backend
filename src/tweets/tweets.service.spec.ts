@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
-import { Post } from './entities/post.entity';
-import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/create-post.dto';
+import { Tweet } from './entities/tweet.entity';
+import { TweetsService } from './tweets.service';
+import { CreateTweetDto } from './dto/create-post.dto';
 import { UsersService } from '../users/users.service';
 
 const postArray = [
@@ -16,11 +16,11 @@ const postArray = [
   },
 ];
 
-const createdPost = new Post();
+const createdPost = new Tweet();
 createdPost.body = 'This is a post.';
 createdPost.authorId = 1;
 
-const createPostDto: CreatePostDto = {
+const createPostDto: CreateTweetDto = {
   body: 'This is a post.',
   authorId: 1,
 };
@@ -42,16 +42,16 @@ export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
 );
 
 describe('PostsService', () => {
-  let service: PostsService;
+  let service: TweetsService;
   let usersService: UsersService;
-  let repository: MockType<Repository<Post>>;
+  let repository: MockType<Repository<Tweet>>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        PostsService,
+        TweetsService,
         {
-          provide: getRepositoryToken(Post),
+          provide: getRepositoryToken(Tweet),
           useFactory: repositoryMockFactory,
         },
         {
@@ -63,9 +63,9 @@ describe('PostsService', () => {
       ],
     }).compile();
 
-    service = module.get<PostsService>(PostsService);
+    service = module.get<TweetsService>(TweetsService);
     usersService = module.get<UsersService>(UsersService);
-    repository = module.get(getRepositoryToken(Post));
+    repository = module.get(getRepositoryToken(Tweet));
   });
 
   it('should be defined', () => {
