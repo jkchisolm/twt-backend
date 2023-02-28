@@ -12,12 +12,14 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
     // Check if user already exists in database
-    const userExists = this.usersRepository.findOne({
+    const userExists = await this.usersRepository.findOne({
       where: { email: createUserDto.email },
     });
-    if (userExists) return undefined;
+    if (userExists) {
+      return undefined;
+    }
 
     // Hash password
     const password = createUserDto.password;
