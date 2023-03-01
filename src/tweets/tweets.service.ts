@@ -40,6 +40,16 @@ export class TweetsService {
     }
   }
 
+  findByAuthor(authorId: number) {
+    // Check if author exists
+    const author = this.usersService.findOne(authorId);
+    if (!author) {
+      return undefined;
+    }
+    // Find all posts by author
+    return this.postsRepository.find({ where: { authorId } });
+  }
+
   remove(id: number) {
     const post = this.postsRepository.findOne({ where: { id } });
     if (post) {

@@ -110,6 +110,38 @@ describe('PostsService', () => {
     });
   });
 
+  describe('findByAuthor()', () => {
+    describe('when author exists', () => {
+      it('should return the posts', async () => {
+        repository.find.mockReturnValue(postArray);
+        const user = new User();
+        user.id = 1;
+        jest.spyOn(usersService, 'findOne').mockResolvedValue(user);
+        expect(await service.findByAuthor(1)).toEqual(postArray);
+        expect(repository.find).toHaveBeenCalledWith({
+          where: { authorId: 1 },
+        });
+      });
+      it('should return an empty array if no posts exist', async () => {
+        repository.find.mockReturnValue([]);
+        const user = new User();
+        user.id = 1;
+        jest.spyOn(usersService, 'findOne').mockResolvedValue(user);
+        expect(await service.findByAuthor(1)).toEqual([]);
+        expect(repository.find).toHaveBeenCalledWith({
+          where: { authorId: 1 },
+        });
+      });
+    });
+    describe("when author doesn't exist", () => {
+      it('should return undefined', async () => {
+        repository.find.mockReturnValue(undefined);
+        expect(await service.findByAuthor(1)).toBeUndefined();
+        expect(repository.find).not.toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('remove()', () => {
     describe('when post exists', () => {
       it('should remove the post', async () => {

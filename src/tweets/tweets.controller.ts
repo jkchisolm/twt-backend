@@ -44,6 +44,17 @@ export class TweetsController {
     return this.tweetsService.findOne(+id);
   }
 
+  @Get('author/:id')
+  @ApiOperation({ summary: 'Returns all tweets by a given author' })
+  @ApiResponse({
+    status: 200,
+    description: 'All tweets by a given author',
+    type: [Tweet],
+  })
+  findByAuthor(@Param('id') id: string) {
+    return this.tweetsService.findByAuthor(+id);
+  }
+
   @ApiOperation({ summary: 'Deletes a tweet' })
   @ApiResponse({
     status: 200,
