@@ -12,15 +12,18 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
-@ApiTags('users')
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @ApiOperation({ summary: 'Create a new user' })
+  @ApiBody({
+    type: CreateUserDto,
+  })
   @ApiResponse({
     status: 201,
     description: 'Created a new user',
@@ -54,16 +57,45 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'The user with the given id',
+    type: User,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+  })
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'The updated user',
+    type: User,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+    type: undefined,
+  })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
+  @ApiResponse({
+    status: 200,
+    description: 'The deleted user',
+    type: User,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+    type: undefined,
+  })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

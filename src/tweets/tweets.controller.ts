@@ -1,15 +1,9 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { TweetsService as TweetsService } from './tweets.service';
 import { CreateTweetDto } from './dto/create-post.dto';
-import {
-  ApiBody,
-  ApiOperation,
-  ApiParam,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { Tweet as Tweet } from './entities/tweet.entity';
+import { Tweet } from './entities/tweet.entity';
 
 @ApiTags('Tweets')
 @Controller('tweets')
