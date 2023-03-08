@@ -50,6 +50,24 @@ export class TweetsService {
     return this.postsRepository.find({ where: { authorId } });
   }
 
+  async findAuthorInfo(id: number) {
+    // Find post by id
+    const post = await this.postsRepository.findOne({
+      where: { id },
+      relations: { author: true },
+    });
+
+    // Check if post exists
+    if (!post) {
+      return undefined;
+    }
+
+    // return author
+    return post.author;
+
+    // return 'This action returns author info for a post';
+  }
+
   remove(id: number) {
     const post = this.postsRepository.findOne({ where: { id } });
     if (post) {

@@ -7,12 +7,16 @@ import { TweetsService } from './tweets.service';
 import { CreateTweetDto } from './dto/create-post.dto';
 import { UsersService } from '../users/users.service';
 
+const dummyUser = new User();
+dummyUser.id = 1;
+dummyUser.name = 'John Doe';
+
 const postArray = [
   {
     id: 1,
     body: 'This is a post.',
     created_at: new Date(),
-    author: new User(),
+    author: dummyUser,
   },
 ];
 
@@ -138,6 +142,22 @@ describe('PostsService', () => {
         repository.find.mockReturnValue(undefined);
         expect(await service.findByAuthor(1)).toBeUndefined();
         expect(repository.find).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('findAuthorInfo()', () => {
+    describe('when tweet exists', () => {
+      it('should return basic information about the author', async () => {
+        repository.findOne.mockReturnValue(postArray[0]);
+        expect(await service.findAuthorInfo(1)).toEqual({
+          id: 1,
+          name: 'John Doe',
+        });
+        expect(repository.findOne).toHaveBeenCalledWith({
+          where: { id: 1 },
+          relations: { author: true },
+        });
       });
     });
   });

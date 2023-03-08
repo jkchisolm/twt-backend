@@ -4,6 +4,7 @@ import { CreateTweetDto } from './dto/create-post.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Tweet } from './entities/tweet.entity';
+import { User } from '../users/entities/user.entity';
 
 @ApiTags('Tweets')
 @Controller('tweets')
@@ -53,6 +54,17 @@ export class TweetsController {
   })
   findByAuthor(@Param('id') id: string) {
     return this.tweetsService.findByAuthor(+id);
+  }
+
+  @Get('authorInfo/:id')
+  @ApiOperation({ summary: 'Gets the information of the author of a tweet' })
+  @ApiResponse({
+    status: 200,
+    description: 'The information of the author of a tweet',
+    type: User,
+  })
+  findAuthorInfo(@Param('id') id: string) {
+    return this.tweetsService.findAuthorInfo(+id);
   }
 
   @ApiOperation({ summary: 'Deletes a tweet' })
