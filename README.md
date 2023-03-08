@@ -1,73 +1,65 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+<img src="https://socialify.git.ci/jkchisolm/twt-backend/image?language=1&name=1&owner=1&pattern=Signal&stargazers=1&theme=Auto" alt="twt-backend" width="640" height="320" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">
+  A backend powering a Twitter clone.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<p align="center">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/jkchisolm/twt-backend/main.yml">
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/jkchisolm/twt-backend">
+<img alt="Website" src="https://img.shields.io/website?label=API&url=https%3A%2F%2Ftwt-api.server.joshuachisolmserver.com">
+</p>
 
-## Description
+# 🌐 Website - Currently in progress
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## API Info
 
-## Installation
+### Host
 
-```bash
-$ npm install
-```
+- [https://twt-api.server.joshuachisolmserver.com](https://twt-api.server.joshuachisolmserver.com) **[Primary]**
 
-## Running the app
+This is the repo containing the server for my Twitter clone.
+To view the frontend code, check out the [frontend repo](https://www.github.com/frozenal/twt-frontend)
 
-```bash
-# development
-$ npm run start
+## Tech Stack
 
-# watch mode
-$ npm run start:dev
+- **Server:** NestJS with Express
+- **Database:** PostgreSQL
+- **Web Server:** Hetzner Cloud VPS
 
-# production mode
-$ npm run start:prod
-```
+## Setup
 
-## Test
+### 1. Docker Compose Setup **(Recommended)**
 
-```bash
-# unit tests
-$ npm run test
+1. Open your CLI and clone the repo
+   ```
+    git clone https://github.com/jkchisolm/twt-backend.git
+    cd twt-backend
+   ```
+2. Create a `.env` file following the example in `.env.example`
+3. Run Docker Compose
+   ```
+    docker-compose up --build
+   ```
 
-# e2e tests
-$ npm run test:e2e
+### 2. Manual Setup
 
-# test coverage
-$ npm run test:cov
-```
+1. Install PostgreSQL if you do not already have it installed.
+2. Open your CLI and clone the repo
 
-## Support
+   ```
+    git clone https://github.com/jkchisolm/twt-backend.git
+    cd twt-backend
+   ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3. Create a `.env` file following the format in `.env.example`
+4. Install the required modules with `npm install`
+5. Run the server with `npm run start`
 
-## Stay in touch
+## Contact Me
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+If you have any questions or concerns, contact me
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+- [My Website](https://www.joshauchisolm.com)
+- [Twitter](https://www.twitter.com/frozenal)
